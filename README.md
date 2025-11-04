@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GeoView - Next.js
 
-## Getting Started
+Projeto GeoView de React + Next.js 14.
 
-First, run the development server:
+## 🚀 Instalação
+
+```bash
+cd next-app
+npm install
+```
+
+## 🏃 Executar em desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O aplicativo estará disponível em `http://localhost:8080`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Build para produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📁 Estrutura do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+```
+next-app/
+├── app/                    # Rotas e páginas (App Router)
+│   ├── layout.tsx         # Layout raiz
+│   ├── page.tsx           # Página Home
+│   ├── quem-somos/        # Rota /quem-somos
+│   ├── servicos/          # Rota /servicos
+│   └── contato/           # Rota /contato
+├── components/            # Componentes React
+│   ├── ui/               # Componentes UI (shadcn/ui)
+│   ├── Header.tsx        # Cabeçalho
+│   ├── Footer.tsx        # Rodapé
+│   └── WhatsAppButton.tsx# Botão WhatsApp flutuante
+├── consts/               # Constantes e dados
+├── helpers/              # Funções auxiliares
+├── hooks/                # React Hooks customizados
+├── lib/                  # Utilitários
+└── public/               # Assets estáticos (imagens, vídeos)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔄 Vantagens do Next 14 para SEO
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Roteamento**: Next.js usa roteamento baseado em arquivos (App Router)
+2. **Navegação**: `Link` vem de `next/link` ao invés de `react-router-dom`
+3. **Imagens**: Use o componente `Image` do Next.js para otimização automática
+4. **Assets**: Coloque arquivos estáticos na pasta `public/`
+5. **Client Components**: Componentes com interatividade precisam da diretiva `"use client"`
 
-## Deploy on Vercel
+## ✅ Componentes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Configuração base (Next.js, TypeScript, Tailwind)
+- ✅ Componentes UI (shadcn/ui)
+- ✅ Header com navegação
+- ✅ Footer
+- ✅ WhatsAppButton
+- ✅ Página Home
+- ✅ Página Quem Somos
+- ✅ Página Serviços
+- ✅ Página Contato
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🛠️ Tecnologias
+
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Lucide Icons
+- React Hook Form + Zod
+
+## 📞 Contato do Desenvolvedor
+
+- Milad Roghanian: miladr100@gmail.com
+
