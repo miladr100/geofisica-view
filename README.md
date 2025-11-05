@@ -9,6 +9,25 @@ cd next-app
 npm install
 ```
 
+## ⚙️ Configuração de Variáveis de Ambiente
+
+1. Copie o arquivo `.env.example` para `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+2. Edite o arquivo `.env.local` e preencha as variáveis necessárias:
+```env
+# API Keys
+RESEND_API_KEY=your_resend_api_key_here
+
+```
+
+**Importante**: 
+- Variáveis com prefixo `NEXT_PUBLIC_` são expostas ao cliente (browser)
+- O arquivo `.env.local` está no `.gitignore` e não será commitado
+- Para produção, configure as variáveis no painel de seu provedor de hospedagem
+
 ## 🏃 Executar em desenvolvimento
 
 ```bash
