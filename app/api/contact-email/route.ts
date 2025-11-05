@@ -5,12 +5,20 @@ import { NewContactRequest } from "@/components/emails/NewContactRequest";
 import { NewContactReceipt } from "@/components/emails/NewContactReceipt";
 import { ContactFormType } from "@/lib/types";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Função helper para obter instância do Resend
+function getResend() {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        throw new Error("RESEND_API_KEY não está configurada");
+    }
+    return new Resend(apiKey);
+}
 
 async function sendContactRequestEmail(
     contactFormData: ContactFormType
 ) {
     try {
+        const resend = getResend();
         console.log(`Sending email to ${email}...`);
         const { error } = await resend.emails.send({
             from: `We-Coffeing <${DEFAULT_EMAIL}>`,
@@ -37,6 +45,7 @@ async function sendContactReceiptEmail(
     contactFormData: ContactFormType
 ) {
     try {
+        const resend = getResend();
         console.log(`Sending receipt email to ${contactFormData.email}...`);
         const { error } = await resend.emails.send({
             from: `We-Coffeing <${DEFAULT_EMAIL}>`,
@@ -60,17 +69,38 @@ async function sendContactReceiptEmail(
 }
 
 export async function POST(req: NextRequest) {
-    const emailData = await req.json() as ContactFormType;
-    
     try {
+        const emailData = await req.json() as ContactFormType;
+        
+        // Validação dos dados recebidos
+        if (!emailData.fullName || !emailData.email || !emailData.message) {
+            return NextResponse.json(
+                { error: "Campos obrigatórios faltando: fullName, email e message são necessários" },
+                { status: 400 }
+            );
+        }
+
+        // Validação básica de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailData.email)) {
+            return NextResponse.json(
+                { error: "Email inválido" },
+                { status: 400 }
+            );
+        }
+
+        // Enviar emails
         await sendContactRequestEmail(emailData);
         await sendContactReceiptEmail(emailData);
 
-        return NextResponse.json({ status: 200 });
+        return NextResponse.json({ 
+            status: 200,
+            message: "Email enviado com sucesso"
+        });
     } catch (err) {
-        console.log("error sending email", err);
+        console.error("Error sending email:", err);
         return NextResponse.json(
-            { error: "Internal Server Error" },
+            { error: err instanceof Error ? err.message : "Internal Server Error" },
             { status: 500 }
         );
     }

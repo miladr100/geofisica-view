@@ -39,7 +39,7 @@ export const NewContactReceipt = ({
                 )}
 
                 <Text style={support}>
-                    Precisa seguir up? Você pode responder diretamente para este email:{" "}
+                    Precisa nos contatar novamente? Você pode responder diretamente para este email:{" "}
                     <a href={`mailto:${email}`} style={link}>
                         {email}
                     </a>

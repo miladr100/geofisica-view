@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
@@ -12,9 +13,75 @@ import { arrayAddress, phone, email } from "@/consts/baseConstants";
 import { formattedPhone } from "@/helpers";
 
 export default function Contato() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateForm = (): string | null => {
+    // Validação básica
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      return "Por favor, preencha todos os campos obrigatórios.";
+    }
+
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      return "Por favor, insira um e-mail válido.";
+    }
+
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+    
+    const validationError = validateForm();
+    if (validationError) {
+      toast.error(validationError);
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/contact-email', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro ao enviar mensagem");
+      }
+
+      // Limpar formulário após sucesso
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+    } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
+      toast.error("Erro ao enviar mensagem. Por favor, tente novamente mais tarde.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -93,24 +160,59 @@ export default function Contato() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="name">Nome Completo *</Label>
-                      <Input id="name" required placeholder="Seu nome completo" />
+                      <Label htmlFor="fullName">Nome Completo *</Label>
+                      <Input
+                        id="fullName"
+                        name="fullName"
+                        type="text"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                        placeholder="Seu nome completo"
+                        disabled={isLoading}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="email">E-mail *</Label>
-                      <Input id="email" type="email" required placeholder="seu@email.com" />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="seu@email.com"
+                        disabled={isLoading}
+                      />
                     </div>
                   </div>
                   <div>
                     <Label htmlFor="phone">Telefone</Label>
-                    <Input id="phone" type="tel" placeholder="(00) 00000-0000" />
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="(00) 00000-0000"
+                      disabled={isLoading}
+                    />
                   </div>
                   <div>
                     <Label htmlFor="message">Mensagem *</Label>
-                    <Textarea id="message" required placeholder="Descreva como podemos ajudá-lo..." rows={6} />
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      placeholder="Descreva como podemos ajudá-lo..."
+                      rows={6}
+                      disabled={isLoading}
+                    />
                   </div>
-                  <Button type="submit" className="w-full" size="lg">
-                    Enviar Mensagem
+                  <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+                    {isLoading ? "Enviando..." : "Enviar Mensagem"}
                   </Button>
                 </form>
               </CardContent>

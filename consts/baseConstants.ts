@@ -29,7 +29,7 @@ import {
 export const address = "Rua Cardeal Arcoverde, 928 - São Paulo - SP";
 export const phone = "11961718358";
 export const email = "hsoares@geofisica-view.com";
-export const DEFAULT_EMAIL = "wecoffeing@officialfemipro24.shop";
+export const DEFAULT_EMAIL = "site@geofisica-view.abrdns.com";
 export const homeServices = [
   {
     icon: Radar,
