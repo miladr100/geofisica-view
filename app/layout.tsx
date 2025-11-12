@@ -14,6 +14,29 @@ export const metadata: Metadata = {
   title: "GeoView - Soluções em Geofísica e Hidrogeologia",
   description: "Especialistas em soluções de geofísica, georadar e hidrogeologia para projetos de engenharia, mineração e meio ambiente.",
   keywords: "geofísica, hidrogeologia, georadar, sísmica, mineração, meio ambiente, engenharia",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/favicon/apple-touch-icon.png",
+    shortcut: "/favicon/favicon.ico",
+    other: [
+      {
+        rel: "android-chrome-192x192",
+        url: "/favicon/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+      {
+        rel: "android-chrome-512x512",
+        url: "/favicon/android-chrome-512x512.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
