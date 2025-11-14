@@ -92,13 +92,13 @@ const Header = () => {
             </Link>
 
             {/* Services Dropdown */}
-            <NavigationMenu>
+            <NavigationMenu className="relative">
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-base font-medium">
                     Serviços
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                  <NavigationMenuContent className="right-0">
                     <div className="grid gap-3 p-6 w-[600px] grid-cols-2 bg-popover">
                       {headerServices.map((service) => (
                         <NavigationMenuLink key={service.path} asChild>
