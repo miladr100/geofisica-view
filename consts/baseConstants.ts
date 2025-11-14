@@ -40,10 +40,10 @@ export const homeServices = [
     link: "/servicos/georadar",
   },
   {
-    icon: Droplets,
-    title: "Hidrogeologia",
-    description: "Estudos hidrológicos e perfuração de poços tubulares.",
-    link: "/servicos/hidrogeologia",
+    icon: LineChart,
+    title: "Perfilagem Geofísica",
+    description: "Perfilagem completa de poços utilizando diversos métodos geofísicos para caracterização detalhada.",
+    slug: "perfilagem-geofisica",
   },
   {
     icon: Zap,
