@@ -203,8 +203,90 @@ export default function GPRArqueologiaPage() {
         </div>
       </section>
 
-      {/* Processamento de Dados */}
+      {/* Galeria de Imagens */}
       <section className="py-16 bg-white dark:bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">GPR em Ação - Projetos Arqueológicos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="border-none shadow-soft overflow-hidden">
+                <div className="relative w-full h-64">
+                  <Image
+                    src="/gpr-arqueologia/Arqueologia georadar.jpg"
+                    alt="Equipamento GPR sendo utilizado em investigação arqueológica - georadar em sítio arqueológico"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">GPR em Investigação Arqueológica</CardTitle>
+                  <CardDescription>
+                    Equipamento GPR sendo utilizado em campo para investigação não destrutiva de sítios arqueológicos
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-none shadow-soft overflow-hidden">
+                <div className="relative w-full h-64">
+                  <Image
+                    src="/gpr-arqueologia/Arqueologia gpr.jpg"
+                    alt="Aplicação de georadar em arqueologia - método não destrutivo para localização de artefatos"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">Método Não Destrutivo</CardTitle>
+                  <CardDescription>
+                    Investigação arqueológica preservando a integridade dos sítios históricos
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-none shadow-soft overflow-hidden">
+                <div className="relative w-full h-64">
+                  <Image
+                    src="/gpr-arqueologia/arqueologia.jpeg"
+                    alt="Georadar aplicado em projetos arqueológicos - detecção de estruturas e artefatos enterrados"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">Detecção de Estruturas</CardTitle>
+                  <CardDescription>
+                    Localização precisa de estruturas históricas e artefatos em subsuperfície
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-none shadow-soft overflow-hidden">
+                <div className="relative w-full h-64">
+                  <Image
+                    src="/gpr-arqueologia/GPR aluguel.jpg"
+                    alt="Equipamento GPR profissional para investigações arqueológicas - tecnologia de ponta"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">Equipamento Profissional</CardTitle>
+                  <CardDescription>
+                    Tecnologia de ponta em georadar para investigações arqueológicas precisas
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Processamento de Dados */}
+      <section className="py-16 bg-gradient-to-b from-blue-50 to-slate-50 dark:from-blue-950/20 dark:to-slate-900/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold mb-6 text-center">Processamento e Interpretação de Dados</h2>
