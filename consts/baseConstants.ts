@@ -122,7 +122,6 @@ export const headerServices = [
   { name: "Perfilagem Ótica", path: "/servicos/perfilagem-optica" },
   { name: "Perfilagem Geofísica", path: "/servicos/perfilagem-geofisica" },
   { name: "Sísmica", path: "/servicos/sismica-refracao" },
-  { name: "Sísmica de Refração e Downhole", path: "/servicos/sismica-downhole" },
   { name: "MASW - Análise de Ondas de Superfície", path: "/servicos/masw" },
   { name: "Estudo geológico", path: "/servicos/estudo-geologico" },
   { name: "Monitoramento de solo", path: "/servicos/monitoramento-solo" },
