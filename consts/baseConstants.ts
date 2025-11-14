@@ -55,7 +55,7 @@ export const homeServices = [
     icon: Camera,
     title: "Perfilagem Ótica",
     description: "Imageamento interno de poços através de câmeras especializadas para inspeção e diagnóstico.",
-    link: "/servicos/perfilagem-optica",
+    link: "/servicos/perfilagem-otica",
   },
   {
     icon: Mountain,
@@ -119,7 +119,7 @@ export const headerServices = [
   { name: "GPR 3D", path: "/servicos/gpr-3d" },
   { name: "Imageamento Elétrico", path: "/servicos/imageamento-eletrico" },
   { name: "Imageamento Elétrico para poço", path: "/servicos/imageamento-eletrico-poco" },
-  { name: "Perfilagem Ótica", path: "/servicos/perfilagem-optica" },
+  { name: "Perfilagem Ótica", path: "/servicos/perfilagem-otica" },
   { name: "Perfilagem Geofísica", path: "/servicos/perfilagem-geofisica" },
   { name: "Sísmica", path: "/servicos/sismica-refracao" },
   { name: "MASW - Análise de Ondas de Superfície", path: "/servicos/masw" },
@@ -217,7 +217,7 @@ export const allServices = [
     icon: Camera,
     title: "Perfilagem Ótica",
     description: "Imageamento interno de poços através de câmeras especializadas para inspeção e diagnóstico.",
-    slug: "perfilagem-optica",
+    slug: "perfilagem-otica",
   },
   {
     icon: LineChart,

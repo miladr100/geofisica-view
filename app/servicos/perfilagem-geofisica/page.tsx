@@ -390,7 +390,7 @@ export default function PerfilagemGeofisicaPage() {
               </Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-white border-white hover:bg-white/10">
-              <Link href="/servicos/perfilagem-optica">
+              <Link href="/servicos/perfilagem-otica">
                 Saiba Mais sobre Perfilagem Ótica
               </Link>
             </Button>
