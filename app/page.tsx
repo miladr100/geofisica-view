@@ -91,7 +91,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={service.link}>
+                    <Link href={service?.link || "/servicos"}>
                       Saiba mais <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
