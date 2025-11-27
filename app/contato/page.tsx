@@ -157,7 +157,7 @@ export default function Contato() {
             <h2 className="mb-6">Formulário de Contato</h2>
             <Card className="border-none shadow-medium">
               <CardContent className="pt-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 contact-form">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="fullName">Nome Completo *</Label>
