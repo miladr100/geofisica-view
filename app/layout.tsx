@@ -7,6 +7,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Toaster } from "@/components/toaster";
 import { Toaster as Sonner } from "@/components/sonner";
 import { TooltipProvider } from "@/components/tooltip";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -81,6 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
           <Toaster />
           <Sonner />
+          <Analytics />
         </TooltipProvider>
       </body>
     </html>
