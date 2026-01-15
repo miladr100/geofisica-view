@@ -74,7 +74,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <TooltipProvider>
           <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="flex-1 pt-[120px]">
+            <main className="flex-1 md:pt-[120px]">
               {children}
             </main>
             <Footer />
