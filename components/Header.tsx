@@ -117,6 +117,16 @@ const Header = () => {
             </NavigationMenu>
 
             <Link
+              href="/blog"
+              className={cn(
+                "text-base font-medium transition-smooth hover:text-primary",
+                isActive("/blog") ? "text-primary" : "text-foreground"
+              )}
+            >
+              Blog
+            </Link>
+
+            <Link
               href="/contato"
               className={cn(
                 "text-base font-medium transition-smooth hover:text-primary",
@@ -177,6 +187,13 @@ const Header = () => {
                 </Link>
               </div>
             </div>
+            <Link
+              href="/blog"
+              className="block py-2 text-sm font-medium hover:text-primary transition-smooth"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </Link>
             <Link
               href="/contato"
               className="block py-2 text-sm font-medium hover:text-primary transition-smooth"
