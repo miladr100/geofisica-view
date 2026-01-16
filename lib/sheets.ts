@@ -1,12 +1,8 @@
 import { google } from "googleapis";
 import { marked } from "marked";
-import { JSDOM } from "jsdom";
-import createDOMPurify from "dompurify";
+import sanitizeHtml from "sanitize-html";
 import type { RawPost, Post, BlogFilters, BlogListResult } from "./types/blog";
 import { normalizeTag, generateSlug } from "./types/blog";
-
-const window = new JSDOM("").window;
-const DOMPurify = createDOMPurify(window as any);
 
 function getSheetsClient() {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -79,8 +75,8 @@ function markdownToHtml(markdown: string): string {
     gfm: true,
   }) as string;
 
-  return DOMPurify.sanitize(html, {
-    ALLOWED_TAGS: [
+  return sanitizeHtml(html, {
+    allowedTags: [
       "p",
       "br",
       "strong",
@@ -108,7 +104,12 @@ function markdownToHtml(markdown: string): string {
       "td",
       "th",
     ],
-    ALLOWED_ATTR: ["href", "src", "alt", "title", "class"],
+    allowedAttributes: {
+      a: ["href", "title"],
+      img: ["src", "alt", "title"],
+      "*": ["class"],
+    },
+    allowedSchemes: ["http", "https", "mailto"],
   });
 }
 

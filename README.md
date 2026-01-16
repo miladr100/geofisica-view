@@ -128,8 +128,7 @@ next-app/
 - **Blog:**
   - Google Sheets API (CMS)
   - Marked (Markdown parser)
-  - DOMPurify (HTML sanitization)
-  - JSDOM (DOM para Node.js)
+  - sanitize-html (HTML sanitization)
 
 ## 📞 Contato do Desenvolvedor
 
