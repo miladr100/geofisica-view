@@ -21,7 +21,17 @@ cp .env.example .env.local
 # API Keys
 RESEND_API_KEY=your_resend_api_key_here
 
+# Google Sheets API (Blog)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account@projeto.iam.gserviceaccount.com
+GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nSua chave privada aqui\n-----END PRIVATE KEY-----\n"
+GOOGLE_SHEETS_ID=seu-google-sheets-id-aqui
+GOOGLE_SHEETS_RANGE=posts!A1:K
+
+# Site URL (para SEO/Open Graph)
+NEXT_PUBLIC_SITE_URL=https://geoview.com.br
 ```
+
+**Para mais detalhes sobre a configuração do Blog, consulte [BLOG_SETUP.md](./BLOG_SETUP.md)**
 
 **Importante**: 
 - Variáveis com prefixo `NEXT_PUBLIC_` são expostas ao cliente (browser)
@@ -50,18 +60,29 @@ next-app/
 ├── app/                    # Rotas e páginas (App Router)
 │   ├── layout.tsx         # Layout raiz
 │   ├── page.tsx           # Página Home
+│   ├── blog/              # Blog (listagem e posts)
+│   │   ├── page.tsx       # Listagem do blog
+│   │   └── [slug]/        # Post individual
 │   ├── quem-somos/        # Rota /quem-somos
 │   ├── servicos/          # Rota /servicos
 │   └── contato/           # Rota /contato
 ├── components/            # Componentes React
+│   ├── blog/             # Componentes do blog
+│   │   ├── BlogPostCard.tsx
+│   │   ├── BlogFilters.tsx
+│   │   ├── BlogPagination.tsx
+│   │   └── BlogEmptyState.tsx
 │   ├── ui/               # Componentes UI (shadcn/ui)
 │   ├── Header.tsx        # Cabeçalho
 │   ├── Footer.tsx        # Rodapé
 │   └── WhatsAppButton.tsx# Botão WhatsApp flutuante
+├── lib/                  # Utilitários
+│   ├── sheets.ts         # Integração com Google Sheets (Blog)
+│   └── types/            # Tipos TypeScript
+│       └── blog.ts       # Tipos do blog
 ├── consts/               # Constantes e dados
 ├── helpers/              # Funções auxiliares
 ├── hooks/                # React Hooks customizados
-├── lib/                  # Utilitários
 └── public/               # Assets estáticos (imagens, vídeos)
 ```
 
@@ -73,7 +94,7 @@ next-app/
 4. **Assets**: Coloque arquivos estáticos na pasta `public/`
 5. **Client Components**: Componentes com interatividade precisam da diretiva `"use client"`
 
-## ✅ Componentes
+## ✅ Componentes e Funcionalidades
 
 - ✅ Configuração base (Next.js, TypeScript, Tailwind)
 - ✅ Componentes UI (shadcn/ui)
@@ -84,17 +105,31 @@ next-app/
 - ✅ Página Quem Somos
 - ✅ Página Serviços
 - ✅ Página Contato
+- ✅ **Blog completo** com Google Sheets como CMS
+  - Listagem de posts com paginação (9 por página)
+  - Busca por texto (título, resumo, conteúdo)
+  - Filtro por tags
+  - Página individual de post com SEO completo
+  - Open Graph e Twitter Cards
+  - Imagens otimizadas com next/image
+  - ISR (Incremental Static Regeneration) com revalidação automática a cada 5 minutos
+  - Suporte a Markdown com sanitização HTML
 
 
 ## 🛠️ Tecnologias
 
-- Next.js 14
+- Next.js 14 (App Router)
 - React 18
 - TypeScript
 - Tailwind CSS
 - shadcn/ui
 - Lucide Icons
 - React Hook Form + Zod
+- **Blog:**
+  - Google Sheets API (CMS)
+  - Marked (Markdown parser)
+  - DOMPurify (HTML sanitization)
+  - JSDOM (DOM para Node.js)
 
 ## 📞 Contato do Desenvolvedor
 
