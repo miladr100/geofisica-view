@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'video.wixstatic.com',
       },
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
 };
