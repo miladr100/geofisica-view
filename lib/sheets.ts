@@ -6,7 +6,7 @@ import { normalizeTag, generateSlug } from "./types/blog";
 
 function getSheetsClient() {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  let privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
   const sheetsId = process.env.GOOGLE_SHEETS_ID;
   const range = process.env.GOOGLE_SHEETS_RANGE || "posts!A1:K";
 
@@ -14,6 +14,25 @@ function getSheetsClient() {
     throw new Error(
       "Variáveis de ambiente do Google Sheets não configuradas. Verifique GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY e GOOGLE_SHEETS_ID"
     );
+  }
+
+  // Normalizar a chave privada para diferentes formatos de variáveis de ambiente
+  // Vercel pode passar com \\n ou com quebras de linha reais
+  privateKey = privateKey
+    .replace(/\\n/g, "\n")           // Substituir \n escapado por quebra de linha real
+    .replace(/\\\\n/g, "\n")         // Substituir \\n duplo escapado
+    .replace(/"/g, "")               // Remover aspas se houver
+    .replace(/^['"]|['"]$/g, "")     // Remover aspas no início e fim
+    .trim();
+
+  // Garantir que a chave começa e termina corretamente
+  if (!privateKey.includes("BEGIN PRIVATE KEY")) {
+    throw new Error("Formato inválido da chave privada. Deve conter 'BEGIN PRIVATE KEY'");
+  }
+
+  // Garantir que a chave termina corretamente
+  if (!privateKey.includes("END PRIVATE KEY")) {
+    throw new Error("Formato inválido da chave privada. Deve conter 'END PRIVATE KEY'");
   }
 
   const auth = new google.auth.JWT({
@@ -167,8 +186,14 @@ export async function getAllPosts(): Promise<Post[]> {
     );
 
     return sortedPosts;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Erro ao buscar posts do Google Sheets:", error);
+    
+    // Log mais detalhado para debug em produção
+    if (error?.code === "ERR_OSSL_UNSUPPORTED") {
+      console.error("Erro de formato da chave privada. Verifique se a chave está formatada corretamente nas variáveis de ambiente.");
+    }
+    
     return [];
   }
 }

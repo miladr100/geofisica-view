@@ -72,8 +72,19 @@ NEXT_PUBLIC_SITE_URL=https://geoview.com.br
 ```
 
 **Importante:**
-- A `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` deve estar entre aspas e com `\n` para quebras de linha
+- A `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` pode ser configurada de duas formas:
+  1. **Com quebras de linha reais** (recomendado para Vercel):
+     ```
+     -----BEGIN PRIVATE KEY-----
+     MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
+     -----END PRIVATE KEY-----
+     ```
+  2. **Com \n escapado** (para arquivos .env.local):
+     ```
+     "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...\n-----END PRIVATE KEY-----\n"
+     ```
 - O `GOOGLE_SHEETS_RANGE` define qual aba e intervalo ler (padrão: `posts!A1:K`)
+- **Na Vercel**: Cole a chave completa com quebras de linha reais na interface de variáveis de ambiente
 
 ## 🔄 Revalidação de Cache
 
