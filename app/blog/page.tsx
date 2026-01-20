@@ -6,9 +6,8 @@ import { BlogFilters } from "@/components/blog/BlogFilters";
 import { BlogPagination } from "@/components/blog/BlogPagination";
 import { BlogEmptyState } from "@/components/blog/BlogEmptyState";
 import type { BlogFilters as BlogFiltersType } from "@/lib/types/blog";
-import { REVALIDATE_TIME } from "@/consts/baseConstants";
 
-export const revalidate = REVALIDATE_TIME;
+export const revalidate = 150; // 2.5 minutes
 
 export const metadata: Metadata = {
   title: "Blog | GeoView",
