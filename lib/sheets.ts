@@ -1,8 +1,11 @@
 import { google } from "googleapis";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
+import { unstable_cache } from "next/cache";
 import type { RawPost, Post, BlogFilters, BlogListResult } from "./types/blog";
 import { normalizeTag, generateSlug } from "./types/blog";
+
+const REVALIDATE_TIME = 150; // 2.5 minutes
 
 function getSheetsClient() {
   const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
@@ -175,7 +178,7 @@ function resolveDuplicateSlugs(posts: Post[]): Post[] {
   });
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+async function _getAllPostsUncached(): Promise<Post[]> {
   try {
     const rawPosts = await fetchSheetData();
     const normalizedPosts = rawPosts.map(normalizePost);
@@ -197,6 +200,15 @@ export async function getAllPosts(): Promise<Post[]> {
     return [];
   }
 }
+
+export const getAllPosts = unstable_cache(
+  async () => _getAllPostsUncached(),
+  ["blog-posts"],
+  {
+    revalidate: 150,
+    tags: ["blog-posts"],
+  }
+);
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const posts = await getAllPosts();

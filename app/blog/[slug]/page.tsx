@@ -35,6 +35,7 @@ interface BlogPostPageProps {
   };
 }
 
+export const revalidate = 150; // 2.5 minutes
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
